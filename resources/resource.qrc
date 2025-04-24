@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="dibujito">
+    <file>dibujito.png</file>
+  </qresource>
+</RCC>
