@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6 import uic, QtGui
 
 class SIRModelView(QMainWindow):
@@ -12,6 +12,12 @@ class SIRModelView(QMainWindow):
         self.image.setScaledContents(True)
         self.image.resize(141, 123)
         self.image.setPixmap(resource)
+
+    def show_message(self, type, title, text):
+        message = QMessageBox()
+        if type == 'warning':
+            message.warning(self, title, text)
+        
     
     def set_window_icon(self)->None:
         """Establece el ícono de la ventana del programa."""

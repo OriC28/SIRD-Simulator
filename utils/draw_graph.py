@@ -1,8 +1,8 @@
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-from sir_model import SIRModel
+from utils.sir_model import SIRModel
 
-class DisplayGraph:
+class DrawGraph:
     def __init__(self, sir_model: SIRModel):
         self.time_vector = sir_model.get_time_vector()
         self.solution = sir_model.resolve()
