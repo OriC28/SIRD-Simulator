@@ -1,4 +1,5 @@
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.animation as animation
 from matplotlib.figure import Figure
 from utils.sir_model import SIRModel
 
@@ -7,9 +8,9 @@ class DrawGraph:
         self.time_vector = sir_model.get_time_vector()
         self.solution = sir_model.resolve()
         self.figure = Figure() 
-        self.canvas = FigureCanvas(self.figure)  
-
-    def get_canvas(self):
+        self.canvas = FigureCanvas(self.figure)
+    
+    def get_canvas(self, frame=None):
         """Dibujar el gráfico y lo muestra en un canvas de Qt."""
         S, I, R = self.solution
 
@@ -24,7 +25,8 @@ class DrawGraph:
         ax.set_ylabel('Número de personas')
         ax.legend()
         
-        # Dibujar el gráfico
-        self.canvas.draw()
-        
         return self.canvas 
+
+    def animate(self):
+        """Realiza la animación en tiempo real que actualiza el gráfico."""
+        self.anim = animation.FuncAnimation(self.figure, self.get_canvas, save_count=100, interval=1000)

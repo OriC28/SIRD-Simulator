@@ -39,8 +39,16 @@ class Controller:
     def set_graph(self, graph: DrawGraph):
         """Integra el gráfico y muestra la ventana con el mismo."""
         self.graph_view.graph_canvas = graph.get_canvas()
+        graph.animate()
         self.graph_view.layout.addWidget(self.graph_view.graph_canvas)
+
+        self.move_windows()
         self.graph_view.show()
+
+    def move_windows(self):
+        """Reordena las ventanas para mostrar ambas a la vez."""
+        self.main_view.move(10, 50)
+        self.graph_view.move(460, 50)
 
     def show_graph(self):
         """Abre una nueva ventana con el gráfico del modelo SIR."""
