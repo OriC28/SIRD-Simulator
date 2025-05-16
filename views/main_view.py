@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6 import uic, QtGui
 
-class SIRModelView(QMainWindow):
+class SIRDModelView(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('gui/gui.ui', self)
