@@ -301,14 +301,14 @@ QLineEdit:focus {
    <widget class="QLabel" name="image">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>20</x>
       <y>10</y>
-      <width>141</width>
-      <height>121</height>
+      <width>401</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">image: url(:/dibujito/dibujito.png);</string>
+     <string notr="true">image: url(:/dibujito/logo.png);</string>
     </property>
     <property name="text">
      <string/>
