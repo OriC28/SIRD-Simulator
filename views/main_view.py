@@ -10,7 +10,7 @@ class SIRDModelView(QMainWindow):
         """Configura el logo de la aplicación en la interfaz gráfica."""
         resource = QtGui.QPixmap("resources/logo.png")
         self.image.setScaledContents(True)
-        self.image.resize(401, 111)
+        self.image.resize(300, 250)
         self.image.setPixmap(resource)
 
     def show_message(self, type, title, text):

@@ -299,12 +299,15 @@ QLineEdit:focus {
     </layout>
    </widget>
    <widget class="QLabel" name="image">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>401</width>
-      <height>111</height>
+      <x>70</x>
+      <y>-50</y>
+      <width>311</width>
+      <height>251</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -314,6 +317,9 @@ QLineEdit:focus {
      <string/>
     </property>
    </widget>
+   <zorder>image</zorder>
+   <zorder>simulate</zorder>
+   <zorder>layoutWidget</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
