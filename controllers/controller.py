@@ -20,8 +20,28 @@ class Controller:
 
     def get_inputs(self):
         """Obtiene los datos ingresados por el usuario y los parsea."""
-
+        input_fields = [
+            self.main_view.contagion_rate.text(),
+            self.main_view.recovery_rate.text(),
+            self.main_view.mortality_rate.text(),
+            self.main_view.population.text(),
+            self.main_view.initial_infections.text(),
+            self.main_view.simulation_time.text()
+        ]
         # Aquí se deberían validar los datos antes de retornarlos
+        #Validar campos vacíos 
+        error = self.validator.validate_empty_fields(input_fields)
+        if error is not None:
+            SIRDModelView.show_message(self.main_view,"warning", "Error", error)
+            return [None for field in input_fields]
+
+        # Validar campos numéricos
+        error = self.validator.validate_number_fields(input_fields)
+        if error is not None:
+            SIRDModelView.show_message(self.main_view,"warning", "Error", error)
+            return [None for field in input_fields]
+        
+        #Si todo es correcto, se retornan los datos
         return [
             float(self.main_view.contagion_rate.text()),
             float(self.main_view.recovery_rate.text()),
@@ -70,13 +90,15 @@ class Controller:
 
     def show_graph(self)->None:
         """Abre una nueva ventana con el gráfico del modelo SIR."""
-        self.update_graph()
         
         contagion, recovery, mortality, population, infections, time = self.get_inputs()
-        self.sir_model = SIRDModel(contagion, recovery, mortality, population, infections, time)
-        self.graph = DrawGraph(self.sir_model)
+        if (contagion is not None):
+            self.update_graph()
 
-        self.set_graph()
+            self.sir_model = SIRDModel(contagion, recovery, mortality, population, infections, time)
+            self.graph = DrawGraph(self.sir_model)
 
-        self.graph_view.show()
+            self.set_graph()
+
+            self.graph_view.show()
 
