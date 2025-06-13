@@ -11,10 +11,10 @@ class SIRDModel:
     initial_infections: int
     simulation_time: int
 
-    def _SIR_model(self, SIR_vector: list, time_vector: list, beta: float, gamma: float, miu: float)->list:
-        """"Define el modelo SIR con sus respectivas ecuaciones diferenciales."""
+    def _SIR_model(self, SIRD_vector: list, time_vector: list, beta: float, gamma: float, miu: float)->list:
+        """"Define el modelo SIRD con sus respectivas ecuaciones diferenciales."""
         # Vector con los valores iniciales
-        S, I, R, D = SIR_vector
+        S, I, R, D = SIRD_vector
 
         # Ecuaciones diferenciales
 
@@ -71,13 +71,9 @@ class SIRDModel:
 
         return infected, recovered, deceased
    
-
     def resolve(self)->list:
         """Resuelve las ecuaciones diferenciales del modelo."""
-        SIR_vector = self._get_initial_conditions()
+        SIRD_vector = self._get_initial_conditions()
         time_vector = self.get_time_vector()
-        solution = odeint(self._SIR_model, SIR_vector, time_vector, args=(self.contagion_rate, self.recovery_rate, self.mortality_rate))
+        solution = odeint(self._SIR_model, SIRD_vector, time_vector, args=(self.contagion_rate, self.recovery_rate, self.mortality_rate))
         return solution.T
-
-""" test = SIRDModel(0.3, 0.1, 1000, 1, 100)
-print(test.resolve()) """

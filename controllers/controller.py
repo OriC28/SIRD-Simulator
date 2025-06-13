@@ -1,6 +1,6 @@
 from views.main_view import SIRDModelView
 from views.graph_view import GraphView
-from utils.sir_model import SIRDModel
+from utils.sird_model import SIRDModel
 from utils.draw_graph import DrawGraph
 from utils.validation import Validator
 
@@ -19,7 +19,7 @@ class Controller:
         self.main_view.show()
 
     def get_inputs(self):
-        """Obtiene los datos ingresados por el usuario y los parsea."""
+        """Obtiene los datos ingresados, los valida y parsea."""
         input_fields = [
             self.main_view.contagion_rate.text(),
             self.main_view.recovery_rate.text(),
@@ -28,15 +28,14 @@ class Controller:
             self.main_view.initial_infections.text(),
             self.main_view.simulation_time.text()
         ]
-        # Aquí se deberían validar los datos antes de retornarlos
         #Validar campos vacíos 
-        error = self.validator.validate_empty_fields(input_fields)
+        error = Validator.validate_empty_fields(input_fields)
         if error is not None:
             SIRDModelView.show_message(self.main_view,"warning", "Error", error)
             return [None for field in input_fields]
 
         # Validar campos numéricos
-        error = self.validator.validate_number_fields(input_fields)
+        error = Validator.validate_number_fields(input_fields)
         if error is not None:
             SIRDModelView.show_message(self.main_view,"warning", "Error", error)
             return [None for field in input_fields]
@@ -74,8 +73,8 @@ class Controller:
 
     def set_data_text(self)->None:
         """Agrega los datos estadísticos principales a la vista."""
-        R0, status = self.sir_model.get_basic_reproductive_number()
-        infected, recovered, deceased = self.sir_model.get_peaks()
+        R0, status = self.sird_model.get_basic_reproductive_number()
+        infected, recovered, deceased = self.sird_model.get_peaks()
         self.graph_view.set_text(
             f"""
             Número de reproducción básico: {R0:.2f} ({status})\n
@@ -89,14 +88,14 @@ class Controller:
         self.graph_view.move(460, 15)
 
     def show_graph(self)->None:
-        """Abre una nueva ventana con el gráfico del modelo SIR."""
+        """Abre una nueva ventana con el gráfico del modelo SIRD."""
         
         contagion, recovery, mortality, population, infections, time = self.get_inputs()
         if (contagion is not None):
             self.update_graph()
 
-            self.sir_model = SIRDModel(contagion, recovery, mortality, population, infections, time)
-            self.graph = DrawGraph(self.sir_model)
+            self.sird_model = SIRDModel(contagion, recovery, mortality, population, infections, time)
+            self.graph = DrawGraph(self.sird_model)
 
             self.set_graph()
 

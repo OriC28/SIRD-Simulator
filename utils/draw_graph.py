@@ -1,19 +1,19 @@
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.animation as animation
 from matplotlib.figure import Figure
-
-from utils.sir_model import SIRDModel
+from utils.sird_model import SIRDModel
 
 class DrawGraph:
-    def __init__(self, sir_model: SIRDModel):
-        self.sir_model = sir_model
-        self.time_vector = sir_model.get_time_vector()
-        self.solution = sir_model.resolve()
+    """Clase para dibujar el gráfico del modelo SIRD."""
+    def __init__(self, sird_model: SIRDModel):
+        self.sird_model = sird_model
+        self.time_vector = sird_model.get_time_vector()
+        self.solution = sird_model.resolve()
         self.figure = Figure() 
         self.canvas = FigureCanvas(self.figure)
     
     def get_canvas(self, frame=None):
-        """Dibujar el gráfico y lo muestra en un canvas de Qt."""
+        """Dibuja el gráfico y lo muestra en un canvas de Qt."""
         S, I, R, D = self.solution
 
         # Limpiar la figura si ya existe una

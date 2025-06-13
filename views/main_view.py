@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6 import uic, QtGui
 
 class SIRDModelView(QMainWindow):
+    """Clase que representa la vista principal de la aplicación. Contiene el formulario."""
     def __init__(self):
         super().__init__()
         uic.loadUi('gui/gui.ui', self)
@@ -14,6 +15,7 @@ class SIRDModelView(QMainWindow):
         self.image.setPixmap(resource)
 
     def show_message(self, type, title, text):
+        """Muestra un mensaje de alerta al usuario."""
         message = QMessageBox()
         if type == 'warning':
             message.warning(self, title, text)
