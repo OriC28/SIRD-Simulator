@@ -74,12 +74,8 @@ class Controller:
     def set_data_text(self)->None:
         """Agrega los datos estadísticos principales a la vista."""
         R0, status = self.sird_model.get_basic_reproductive_number()
-        infected, recovered, deceased = self.sird_model.get_peaks()
         self.graph_view.set_text(
-            f"""
-            Número de reproducción básico: {R0:.2f} ({status})\n
-            Picos de la epidemia: (Infectados: {infected:.2f}, Recuperados: {recovered:.2f}, Fallecidos: {deceased:.2f})\n
-            """
+            f"""Número de reproducción básico: {R0:.2f} ({status})"""
         )
 
     def move_windows(self)->None:

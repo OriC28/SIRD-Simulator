@@ -63,14 +63,6 @@ class SIRDModel:
         
         return R0, status
 
-    def get_peaks(self)->list:
-        """Devuelve el pico de la epidemia de cada grupo (infectados, recuperados y fallecidos)."""
-        infected = max(self.resolve()[1])
-        recovered = max(self.resolve()[2])
-        deceased = max(self.resolve()[3])
-
-        return infected, recovered, deceased
-   
     def resolve(self)->list:
         """Resuelve las ecuaciones diferenciales del modelo."""
         SIRD_vector = self._get_initial_conditions()
